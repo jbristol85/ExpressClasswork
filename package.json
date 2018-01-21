@@ -1,0 +1,22 @@
+{
+  "name": "expressclasswork",
+  "version": "1.0.0",
+  "description": "building blocks of express codeschool",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jbristol85/ExpressClasswork.git"
+  },
+  "author": "Josh Bristol",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jbristol85/ExpressClasswork/issues"
+  },
+  "homepage": "https://github.com/jbristol85/ExpressClasswork#readme",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}
