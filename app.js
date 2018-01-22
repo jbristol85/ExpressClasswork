@@ -1,6 +1,12 @@
 var express = require('express');
 var app = express();
 
+// app.get('/', function(request, response){
+// 	response.sendFile(__dirname + '/public/index.html');
+// });
+
+app.use(express.static('public'));
+
 app.get('/', function(request, response){
 	response.send('Hello World');
 });
@@ -17,6 +23,11 @@ app.get('/redirect', function(request, response){
 app.get('/date', function(request, response){
 	var date = new Date();
 	response.send(date);
+});
+
+app.get('/cities', function(request, response){
+	var cities = ["Providence", "Baltimore", "Denver", "San Francisco", "New York City"];
+	response.json(cities);
 });
 
 app.listen(process.env.PORT, function(){
