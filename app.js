@@ -1,9 +1,19 @@
 var express = require('express');
 var app = express();
 
+var bodyParser = require('body-parser');
+var parseUrlencoded = bodyParser.urlencoded({extended:false});
 // app.get('/', function(request, response){
 // 	response.sendFile(__dirname + '/public/index.html');
 // });
+
+var cities = {
+	'Providence': 'Rhode Island',
+	'Baltimore': 'Maryland',
+	'Denver': 'Colorado',
+	'Boston': 'Massachusetts',
+	'Moab': 'Utah'
+	};
 
 app.use(express.static('public'));
 
@@ -25,13 +35,6 @@ app.get('/date', function(request, response){
 	response.send(date);
 });
 
-var cities = {
-	'Providence': 'Rhode Island',
-	'Baltimore': 'Maryland',
-	'Denver': 'Colorado',
-	'Boston': 'Massachusetts',
-	'Moab': 'Utah'
-	};
 
 app.get('/cities', function(request, response){
 	var city = Object.keys(cities);
@@ -53,14 +56,40 @@ app.param('name', function(request, response, next){
 });
 
 app.get('/cities/:name', function(request, response){
-	
-	var description= cities[request.cityName];
-	if(!description){
+	console.log(cities);
+	var state= cities[request.cityName];
+	if(!state){
 		response.status(404).json("Not Found");
 	}else{
-		response.json(description);
+		response.json(state);
 	}
 });
+
+app.post('/cities', parseUrlencoded, function(request, response){
+	console.log(request.body.name)
+	console.log(request.body.state)
+	var casedCity = request.body.name[0].toUpperCase() + request.body.name.slice(1).toLowerCase();
+	var casedState = request.body.state[0].toUpperCase() + request.body.state.slice(1).toLowerCase()
+	if(casedCity.length >= 4 && casedState.length >=2){
+	var newCity = createCity(casedCity, casedState);
+	console.log(newCity);
+	
+	response.status(201).json(newCity);
+	}else
+	response.status(400).json("Invalid City");
+});
+
+app.delete('/cities/:name', function(request, response){
+	delete cities[request.cityName];
+	response.sendStatus(200)
+})
+
+var createCity = function(name, state){
+	// console.log(name, state);
+	cities[name] = state;
+	// console.log(cities)
+	return name;
+};
 
 app.listen(process.env.PORT, function(){
 	console.log('Listening on port '+ process.env.PORT);

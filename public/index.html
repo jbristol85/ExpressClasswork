@@ -5,16 +5,25 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<script src="https://use.fontawesome.com/0140089ae9.js"></script>
+
 	<title>Express Classwork</title>
 </head>
 
 <body>
 	<h1>Express Classwork</h1>
 	<form>
-		<select class="citiesList">
-			
-		</select>
+		<h2>New City</h2>
+		<input name="name" placeholder="City"><br/>
+		<input name="state" placeholder = "State"><br/>
+		<input type="submit">
 	</form>
+	<br/>
+	
+		<ul class="citiesList" id="citiesList">
+			<!--<option></option>-->
+		</ul>
+		<p id="cityStateDisplay"></p>
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 	<script src="client.js"></script>
 </body>
